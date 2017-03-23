@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-
+﻿
 namespace Calculator
 {
     class OperationFactory
@@ -24,6 +19,15 @@ namespace Calculator
                     break;
                 case "/":
                     oper = new OperationDiv();
+                    break;
+                case "SquareRoot":
+                    oper = new OperationSquareRoot();
+                    break;
+                case ".":
+                    oper = new OperationPoint();
+                    break;
+                case "+/-":
+                    oper = new OperationPosAndNeg();
                     break;
                 default:
                     break;

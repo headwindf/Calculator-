@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-
+﻿
 namespace Calculator
 {
     class Operation
@@ -22,11 +17,21 @@ namespace Calculator
             get{return numberB;}
             set { numberB = value; }
         }
-
+        //获得结果
         public virtual double getResult()
         {
             double result = 0.0;
             return result;
+        }
+        //添加小数点
+        public virtual string addPoint(string str)
+        {
+            return str;
+        }
+        //正负号
+        public virtual string posAndNeg(string str)
+        {
+            return str;
         }
     }
 }

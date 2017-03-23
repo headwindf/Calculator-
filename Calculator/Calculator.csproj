@@ -54,6 +54,9 @@
     <Compile Include="OperationDiv.cs" />
     <Compile Include="OperationFactory.cs" />
     <Compile Include="OperationMul.cs" />
+    <Compile Include="OperationPoint.cs" />
+    <Compile Include="OperationPosAndNeg.cs" />
+    <Compile Include="OperationSquareRoot.cs" />
     <Compile Include="OperationSub.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

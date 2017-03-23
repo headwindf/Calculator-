@@ -89,7 +89,8 @@ namespace Calculator
 
         private void btnOperation_Click(object sender, EventArgs e)
         {  
-            Button btn = sender as Button;       
+            Button btn = sender as Button;
+            Operation oper;
             switch (btn.Name)
             {
                 case "btnAdd":
@@ -132,19 +133,8 @@ namespace Calculator
                         resultDouble = 0.0;
                         txtResual.Text = "";
                     }
-                    try
-                    {
-                        bool res = Regex.IsMatch(calShow, @"^(\-)?\d+$");//匹配纯数字
-                        bool res1 = Regex.IsMatch(calShow, @"^(\-)?\d+(\.\d+)?(\+|\-|\*|\/)\d+$");//匹配第二个操作数是否为整数
-                        if (res || res1)//满足其中一个则可以添加小数点
-                        {
-                            calShow += ".";
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("发生错误！", "警告");
-                    }
+                    oper = OperationFactory.createOperation(".");
+                    calShow = oper.addPoint(calShow);
                     txtResual.Text = calShow;
                     setBtnEnableMethon(true);
                     break;
@@ -163,43 +153,15 @@ namespace Calculator
                     break;
                 case "btnSquareRoot":
                     multiDeal();//先得出前面表达式的值
-                    try
-                    {
-                        Regex reg = new Regex(@"(\+|\-)?(\d+)(\.\d+)?");
-                        var res = reg.Match(calShow).Groups;
-
-                        if (res[1].ToString() == "-")
-                        {
-                            throw new Exception("负数不能开根号！");
-                        }
-                        resultDouble = Math.Sqrt(Convert.ToDouble(calShow));
-                        calShow = resultDouble.ToString();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "警告");
-                    }
+                    oper = OperationFactory.createOperation("SquareRoot");   
+                    resultDouble = oper.getResult();
+                    calShow = resultDouble.ToString();
                     txtResual.Text = calShow;
                     break;
                 case "btnPosAndNeg":
                     multiDeal();//先计算结果，再来加正负号
-                    try
-                    {
-                        Regex reg = new Regex(@"^(\-)?");
-                        var res = reg.Match(calShow).Groups;
-                        if (res[1].ToString() == "")//正数
-                        {
-                            calShow = "-" + calShow;
-                        }
-                        else//负数
-                        {
-                            calShow = calShow.Substring(1, calShow.Length - 1);
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("发生错误！", "警告");
-                    }
+                    oper = OperationFactory.createOperation("+/-");
+                    calShow = oper.posAndNeg(calShow);
                     txtResual.Text = calShow;
                     break;
                 default:
